@@ -1,0 +1,99 @@
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    04/28/19 22:17:24
+OutDecision.asm						     Page 1 - 1
+
+
+				.686 
+				public _OutDecision
+				.model flat 
+ 00000000			.code 
+
+				EXTRN  _outEmptySet : proc
+				EXTRN  _outR : proc
+				EXTRN  _outNum : proc
+
+ 00000000			_OutDecision proc
+
+ 00000000  55				push ebp
+ 00000001  8B EC			mov ebp,esp
+ 00000003  8B 45 08			mov eax,[ebp+8] ;адрес первого числа
+ 00000006  8B 4D 0C			mov ecx,[ebp+12] ;адрес второго числа
+
+ 00000009  83 F8 00			cmp eax, 0
+ 0000000C  74 18			je nullA
+
+ 0000000E  DB 45 0C			fild dword ptr [ebp + 12]
+ 00000011  DB 45 08			fild dword ptr [ebp + 8]
+ 00000014  DE F9			fdivp 
+ 00000016  D9 E0			fchs
+
+ 00000018  D9 5D 08			fstp dword ptr [ebp+8]
+ 0000001B  FF 75 08			push [ebp+8]
+ 0000001E  E8 00000000 E		call _outNum
+ 00000023  58				pop eax
+
+ 00000024  EB 11			jmp ifEnd
+
+ 00000026			nullA:
+
+ 00000026  83 F9 00			cmp ecx, 0
+ 00000029  74 07			je nullB
+
+ 0000002B  E8 00000000 E		call _outEmptySet
+					
+ 00000030  EB 05			jmp ifEnd
+
+ 00000032			nullB:
+
+ 00000032  E8 00000000 E		call _outR
+
+ 00000037			ifEnd:
+
+ 00000037  5D				pop ebp
+ 00000038  C3				ret
+
+ 00000039			_OutDecision endp
+				End 
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    04/28/19 22:17:24
+OutDecision.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000039 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_OutDecision . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000039 Public
+  nullA  . . . . . . . . . . . .	L Near	 00000026 _TEXT	
+  nullB  . . . . . . . . . . . .	L Near	 00000032 _TEXT	
+  ifEnd  . . . . . . . . . . . .	L Near	 00000037 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_outEmptySet . . . . . . . . . .	L Near	 00000000 FLAT	External
+_outNum  . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_outR  . . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,117 @@
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    04/29/19 11:41:03
+OutDecision.asm						     Page 1 - 1
+
+
+				.686 
+				public @OutDecision@8
+				.model flat 
+ 00000000			.code 
+
+				EXTRN  _outDivisionBy0 : proc
+				EXTRN  _outNum : proc
+
+ 00000000			@OutDecision@8 proc
+
+ 00000000  66| 3B CA			cmp cx, dx
+ 00000003  7F 2F			jg _gr
+ 00000005  74 1E			je _equal
+
+ 00000007  66| 83 F9 FF			cmp cx, -1
+ 0000000B  74 54			je _nul
+
+ 0000000D  66| 8B C2			mov ax, dx
+ 00000010  66| 41			inc cx
+ 00000012  66| 99			cwd
+ 00000014  66| F7 F9			idiv cx
+ 00000017  66| 8B C8			mov cx, ax
+
+ 0000001A  66| 51			push cx
+ 0000001C  E8 00000000 E		call _outNum
+ 00000021  66| 59			pop cx
+
+ 00000023  EB 41			jmp _end
+
+ 00000025			_equal:
+					
+ 00000025  66| B9 0004			mov cx, 4
+ 00000029  66| 51			push cx
+ 0000002B  E8 00000000 E		call _outNum
+ 00000030  66| 59			pop cx
+
+
+ 00000032  EB 32			jmp _end
+
+ 00000034			_gr:
+ 00000034  66| 83 FA 00			cmp dx, 0
+ 00000038  74 27			je _nul
+
+ 0000003A  66| 8B C1			mov ax, cx
+ 0000003D  66| 0F AF C1			imul ax, cx
+ 00000041  66| 0F AF C1			imul ax, cx
+ 00000045  66| B9 0005			mov cx, 5
+ 00000049  66| 2B C1			sub ax, cx
+ 0000004C  66| 8B CA			mov cx, dx
+ 0000004F  99				cdq
+ 00000050  66| F7 F9			idiv cx
+ 00000053  66| 8B C8			mov cx, ax
+
+ 00000056  66| 51			push cx
+ 00000058  E8 00000000 E		call _outNum
+ 0000005D  66| 59			pop cx
+
+ 0000005F  EB 05			jmp _end
+
+ 00000061			_nul:
+
+ 00000061  E8 00000000 E		call _outDivisionBy0
+
+ 00000066			_end:
+					
+ 00000066  C3				ret
+
+ 00000067			@OutDecision@8 endp
+				End 
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    04/29/19 11:41:03
+OutDecision.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000067 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+@OutDecision@8 . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000067 Public
+  _equal . . . . . . . . . . . .	L Near	 00000025 _TEXT	
+  _gr  . . . . . . . . . . . . .	L Near	 00000034 _TEXT	
+  _nul . . . . . . . . . . . . .	L Near	 00000061 _TEXT	
+  _end . . . . . . . . . . . . .	L Near	 00000066 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_outDivisionBy0  . . . . . . . .	L Near	 00000000 FLAT	External
+_outNum  . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors

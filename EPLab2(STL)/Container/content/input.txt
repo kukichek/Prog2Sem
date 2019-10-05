@@ -1,0 +1,5 @@
+Borland 1 3.3
+C++ 3 8.1
+Python 2 10
+Pascal 3 4.5
+Delphi 4 3.3

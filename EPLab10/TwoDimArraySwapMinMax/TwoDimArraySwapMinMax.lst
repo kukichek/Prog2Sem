@@ -1,0 +1,92 @@
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    05/23/19 13:02:24
+TwoDimArray.asm						     Page 1 - 1
+
+
+				.386
+				public @findMaxRow@8
+				public @findMinRow@8
+				public _swapRows
+				.model flat
+ 00000000			.code
+
+ 00000000			@findMaxRow@8 proc
+
+ 00000000  8B FA		mov edi, edx
+ 00000002  8B C1		mov eax, ecx
+ 00000004  99			cdq
+ 00000005  F7 E1		mul ecx
+ 00000007  8B D8		mov ebx, eax
+
+				.while ebx > 0
+ 0000000B  33 C0			xor eax, eax
+ 0000000D  4B				dec ebx
+
+ 0000000E  C1 E0 02			shl eax, 2
+ 00000011  C1 E3 02			shl ebx, 2
+
+ 00000014  8B 34 07			mov esi, [edi + eax]
+ 00000017  3B 34 1F			cmp esi, [edi + ebx]
+ 0000001A  7D 02			jge _gr
+
+ 0000001C  8B C3			mov eax, ebx
+
+ 0000001E				_gr:
+
+ 0000001E  C1 E8 02			shr eax, 2
+ 00000021  C1 EB 02			shr ebx, 2
+				.endw
+
+ 00000029  F7 F1		div ecx
+
+ 0000002B  C3			ret
+
+ 0000002C			@findMaxRow@8 endp
+
+ 0000002C			@findMinRow@8 proc
+ 0000002C			@findMinRow@8 endp
+
+ 0000002C			_swapRows proc
+ 0000002C			_swapRows endp
+
+				end
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    05/23/19 13:02:24
+TwoDimArray.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002C DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+@findMaxRow@8  . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002C Public
+  _gr  . . . . . . . . . . . . .	L Near	 0000001E _TEXT	
+@findMinRow@8  . . . . . . . . .	P Near	 0000002C _TEXT	Length= 00000000 Public
+_swapRows  . . . . . . . . . . .	P Near	 0000002C _TEXT	Length= 00000000 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors

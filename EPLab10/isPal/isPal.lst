@@ -1,0 +1,70 @@
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    05/23/19 10:14:11
+isPal.asm						     Page 1 - 1
+
+
+				.386
+				public @isPal@8
+				.model flat
+ 00000000			.code
+
+ 00000000			@isPal@8 proc
+
+ 00000000  33 DB		xor ebx, ebx
+ 00000002  49			dec ecx
+
+				.while ebx < ecx
+ 00000005  8B 34 9A			mov esi, [edx + ebx*4]
+ 00000008  3B 34 8A			cmp esi, [edx + ecx*4]
+ 0000000B  74 03			je _eq
+ 0000000D  33 C0				xor eax, eax
+ 0000000F  C3					ret
+ 00000010				_eq:
+ 00000010  43				inc ebx
+ 00000011  49				dec ecx
+				.endw
+
+ 00000016  B8 00000001		mov eax, 1
+
+ 0000001B  C3			ret
+
+ 0000001C			@isPal@8 endp
+				end
+Microsoft (R) Macro Assembler Version 14.15.26730.0	    05/23/19 10:14:11
+isPal.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001C DWord	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+@isPal@8 . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001C Public
+  _eq  . . . . . . . . . . . . .	L Near	 00000010 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors
